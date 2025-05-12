@@ -1,4 +1,4 @@
-# kubernetes scripts for Yugabyte Anywhere
+# k8s related scripts for Yugabyte Anywhere
 
 ## fix-replace-node.sql
 This script will correct the universe metadata in the Yugabyte Anywhere database after a replace node has been run on a k8s universe.
