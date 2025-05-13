@@ -1,0 +1,39 @@
+services:
+  yugabyte:
+    image: yugabytedb/yugabyte:2024.2.2.2-b2
+    ports:
+      - "7070:7000"
+      - "9000:9000"
+      - "15433:15433"
+      - "5433:5433"
+      - "9042:9042"
+      - "7100:7100"
+    container_name: yugabyte
+    environment:
+      - HOST_IP=yugabyte
+    volumes:
+      - yugabyte-data:/home/yugabyte/data
+      - ./init-db.sh:/home/yugabyte/init-db.sh
+      - ./init.sql:/usr/local/share/init.sql
+    entrypoint: ["/bin/bash", "/home/yugabyte/init-db.sh"]      
+  debezium-server:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: debezium-server
+    env_file: ".env"
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /usr/local/airflow/gcloud/application_default_credentials.json
+      CONFIG_STORAGE_TOPIC: /debezium/config
+    ports:
+      - "8080:8080"
+    volumes:
+      - $HOME/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+      - ./debezium-server:/opt/debezium-server/conf
+      - debezium-server-data:/opt/debezium-server/data
+      - ./init-dz.sh:/opt/debezium-server/init-dz.sh      
+    entrypoint: ["/bin/bash", "/opt/debezium-server/init-dz.sh"]
+    depends_on:
+      - yugabyte      
+volumes:
+  yugabyte-data:
+  debezium-server-data:
