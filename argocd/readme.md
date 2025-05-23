@@ -17,3 +17,7 @@ This example can be used with an ArgoCD app to deploy YugabyteDB Anywhere, with 
 3. Replace the secret with a secret obtain from Yugabyte 
 3.Review and Update Manifests: Examine the provided manifests and configurations, updating to suit your specific deployment requirements.
 4. Apply Configurations: Use Argo CD to apply the configurations, which will deploy and manage YugabyteDB according to the defined specifications.
+
+## Docs
+
+More details can be found about the YugabyteDB Anywhere Operator on our [docs](https://docs.yugabyte.com/preview/yugabyte-platform/anywhere-automation/yb-kubernetes-operator/)
