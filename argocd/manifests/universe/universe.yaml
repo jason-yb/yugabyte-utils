@@ -1,0 +1,43 @@
+apiVersion: operator.yugabyte.io/v1alpha1
+kind: YBUniverse
+metadata:
+  name: kubecon
+  namespace: yba-demo-operator
+spec:
+  numNodes: 3
+  replicationFactor: 3
+  enableYSQL: true
+  enableNodeToNodeEncrypt: true
+  enableClientToNodeEncrypt: true
+  enableLoadBalancer: false 
+  ybSoftwareVersion: "2024.2.2.1-b6"
+  enableYSQLAuth: false
+  enableYCQL: false
+  gFlags:
+    masterGFlags:
+      dns_cache_expiration_ms: "60400"
+    tserverGFlags:
+      dns_cache_expiration_ms: "60800"
+      log_min_seconds_to_retain: "990"
+  deviceInfo:
+    volumeSize: 100
+    numVolumes: 1
+    storageClass: "gp3"
+  kubernetesOverrides: 
+    nodeSelector:
+      yugabyte: ybdb
+  resource:
+    tserver:
+      requests:
+        cpu: "4"
+        memory: 16Gi
+      limits:
+        cpu: "4"
+        memory: 16Gi
+    master:
+      requests:
+        cpu: "2"
+        memory: 4Gi
+      limits:
+        cpu: "2"
+        memory: 4Gi

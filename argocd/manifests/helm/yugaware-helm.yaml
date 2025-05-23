@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: yba-demo
+  namespace: argocd
+spec:
+  destination:
+    namespace: yba-demo
+    server: https://kubernetes.default.svc 
+  source:
+    repoURL: 'https://charts.yugabyte.com'  
+    targetRevision: 2024.2.2
+    chart: yugaware  
+    helm:
+      values: |
+        tls:
+          enabled: true
+        nodeSelector:
+          yugabyte: control
+        image:
+          pullSecret: yugabyte-k8s-secret
+        yugaware:
+          storageClass: gp3
+          kubernetesOperatorEnabled: true
+          kubernetesOperatorNamespace: 'yba-demo-operator'
+          defaultUser:
+            enabled: true
+            username: example_user
+            email: 'example@yugabyte.com'
+            password: 'Password!123'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

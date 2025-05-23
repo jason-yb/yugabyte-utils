@@ -1,0 +1,29 @@
+---
+apiVersion: operator.yugabyte.io/v1alpha1
+kind: Release
+metadata:
+  name: "2024.1.1.0-b137"
+  namespace: yba-demo-operator
+spec:
+  config:
+    version: "2024.1.1.0-b137"
+    downloadConfig:
+      http:
+        paths:
+          helmChart: "https://charts.yugabyte.com/yugabyte-2024.1.1.tgz" 
+          x86_64: "https://downloads.yugabyte.com/releases/2024.1.0.0/yugabyte-2024.1.0.0-b129-linux-x86_64.tar.gz"
+---
+apiVersion: operator.yugabyte.io/v1alpha1
+kind: Release
+metadata:
+  name: "2024.2.1.0-b185"
+  namespace: yba-demo-operator
+spec:
+  config:
+    version: "2024.2.1.0-b185"
+    downloadConfig:
+      http:
+        paths:
+          helmChart: "https://charts.yugabyte.com/yugabyte-2024.2.1.tgz" 
+          x86_64: "https://downloads.yugabyte.com/releases/2024.2.1.0/yugabyte-2024.2.1.0-b185-linux-x86_64.tar.gz"
+---
