@@ -26,18 +26,18 @@ spec:
   kubernetesOverrides: 
     nodeSelector:
       yugabyte: ybdb
-  resource:
-    tserver:
-      requests:
-        cpu: "4"
-        memory: 16Gi
-      limits:
-        cpu: "4"
-        memory: 16Gi
-    master:
-      requests:
-        cpu: "2"
-        memory: 4Gi
-      limits:
-        cpu: "2"
-        memory: 4Gi
+    resource:
+      tserver:
+        requests:
+          cpu: "4"
+          memory: 8Gi
+        limits:
+          cpu: "4"
+          memory: 8Gi
+      master:
+        requests:
+          cpu: "2"
+          memory: 4Gi
+        limits:
+          cpu: "2"
+          memory: 4Gi
